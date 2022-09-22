@@ -1,8 +1,12 @@
 // import { withPhotos } from '../components/Hoc/withPhotos'
 import ListOfPhotoCardsComponent from '../components/ListOfPhotoCards'
 
-export const ListOfPhotoCardsContainer = () => {
+interface IProps {
+  categoryId?: number;
+}
+
+export const ListOfPhotoCardsContainer: React.FC<IProps> = (props: IProps) => {
   return (
-    <ListOfPhotoCardsComponent categoryId={3} />
+    <ListOfPhotoCardsComponent categoryId={props.categoryId} />
   )
 }

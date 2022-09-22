@@ -1,8 +1,10 @@
-export interface Welcome {
-  users:      User[];
-  categories: Category[];
-  photos:     Photo[];
-}
+export interface CategoriesQueryData {
+  categories: Category[] | [];
+};
+
+export interface Categories {
+  categories: Category[] | [];
+};
 
 export interface Category {
   id:    number;
@@ -13,7 +15,7 @@ export interface Category {
 }
 
 export interface PhotosQueryData {
-  photos: Photo[];
+  photos: Photo[] | [];
 };
 
 export interface Photo {
@@ -29,9 +31,8 @@ export interface Photos {
 };
 
 export interface PhotoVariables {
-  categoryId: number;
+  categoryId: number | undefined | null;
 };
-
 
 export interface User {
     id:       string;

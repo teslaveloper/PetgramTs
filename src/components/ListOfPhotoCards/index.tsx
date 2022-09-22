@@ -1,10 +1,10 @@
 import React from 'react'
-import { PhotoCard } from '../PhotoCard'
+import { PhotoCard } from '../ListOfPhotoCards/PhotoCard'
 import { Photos } from '../../types'
 import { useGetPhotos } from '../Hooks/useGetPhotos'
 
 interface IProps {
-  categoryId: number
+  categoryId?: number
 }
 
 const ListOfPhotoCardsComponent: React.FC<IProps> = (props: IProps) => {

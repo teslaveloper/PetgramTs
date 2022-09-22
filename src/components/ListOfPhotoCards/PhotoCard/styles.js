@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { fadeInd } from '../styles/animation'
+import { fadeInd } from '../../styles/animation'
 
 export const Article = styled.article`
   min-height: 200px;

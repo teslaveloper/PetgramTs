@@ -1,22 +1,11 @@
 import { useState, useEffect } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import { PhotosQueryData, PhotoVariables } from '../../types'
+import { GET_PHOTOS } from '../../queries'
 
-const PHOTOS_QUERY = gql`
-  query getPhotos($categoryId: ID) {
-    photos(categoryId: $categoryId) {
-      id
-      categoryId
-      userId
-      src
-      likes
-    }
-  }
-`;
-
-export function useGetPhotos (category_id: number) {
+export function useGetPhotos (category_id: number | undefined) {
   return useQuery<PhotosQueryData, PhotoVariables>(
-    PHOTOS_QUERY,
+    GET_PHOTOS,
     { variables: { categoryId: category_id } }
   );
 }

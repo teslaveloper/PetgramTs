@@ -1,32 +1,30 @@
 import React, { useState, useEffect } from 'react'
-import { Category } from '../Category'
+import { Category } from './Category'
 import {
   List, Item
 } from './styles'
 import { useGetCategories } from '../Hooks/useGetCategories'
+import { useHideOnScroll } from '../Hooks/useHideOnScroll';
 
 export const ListOfCategories = () => {
-  const { categories, loading } = useGetCategories()
-  const [showFixed, setShowFixed] = useState(false)
+  const { loading, data, error } = useGetCategories()
+  const { show } = useHideOnScroll();
 
-  useEffect(function () {
-    const onScroll = (e: any) => {
-      const newShowFixed = window.scrollY > 200
-      showFixed !== newShowFixed && setShowFixed(newShowFixed)
-    }
+  if (loading) return <p>Loading Categories...</p>;
+  if (error) return <p>Error</p>;
+  if (!data?.categories) return null;
 
-    document.addEventListener('scroll', onScroll)
-
-    // destruimos el listener
-    return () => document.removeEventListener('scroll', onScroll)
-  }, [showFixed])
+  const { categories } = data
 
   const renderList = (fixed = false) => (
     <List fixed={fixed}>
       {
         categories.map((category: any) =>
           <Item key={category.id}>
-            <Category {...category} />
+            <Category
+              {...category}
+              path={`/category/${category.id}`}
+            />
           </Item>
         )
       }
@@ -37,7 +35,7 @@ export const ListOfCategories = () => {
     <>
       {loading && 'loading...'}
       {renderList()}
-      {showFixed && renderList(true)}
+      {show && renderList(true)}
     </>
   )
 }
